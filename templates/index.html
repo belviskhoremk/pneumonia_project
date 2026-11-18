@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pneumonia Detection</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
@@ -12,15 +13,16 @@
             <form id="upload-form">
                 <div class="form-group">
                     <label for="model-select">Select Model(s):</label>
+                    <!-- Hold Ctrl/Cmd to select several models: their predictions are averaged. -->
                     <select id="model-select" multiple>
-                        <option value="model1">MobileNet</option>
-                        <option value="model2">MobileNetV2</option>
-
+                        {% for model_id, name in models.items() %}
+                        <option value="{{ model_id }}" selected>{{ name }}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="image-upload">Upload Chest Image:</label>
-                    <input type="file" id="image-upload" accept="image/*">
+                    <input type="file" id="image-upload" accept="image/*" required>
                 </div>
                 <button type="submit">Predict</button>
             </form>
@@ -28,7 +30,8 @@
                 <img id="uploaded-image" src="#" alt="Uploaded Image" style="display: none; width: 100%; height: auto;"/>
             </div>
         </div>
-        <div id="result"></div>
+        <div id="result" aria-live="polite"></div>
+        <p class="disclaimer">For educational purposes only. Not a medical device and not a substitute for a diagnosis by a qualified professional.</p>
     </div>
     <script src="/static/script.js"></script>
 </body>

@@ -1,0 +1,5 @@
+Flask==3.0.3
+numpy==1.26.4
+pillow==10.3.0
+# The models were saved with Keras 2.15; newer TensorFlow (Keras 3) cannot load them as-is.
+tensorflow==2.15.1
